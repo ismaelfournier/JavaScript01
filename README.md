@@ -1,4 +1,4 @@
-# Exercice JS #1
+# Exercice JS #1 
 
 Il s'agit ici du premier formulaire de demande de soumission qui a été fait pour Rocket Elevators, mais malheureusement le 
 programmeur avant vous y a laissé beaucoup de problème. Vous avez donc un bon travail de débuggage à faire!
