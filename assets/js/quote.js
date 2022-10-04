@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#numElev_2, #numElev_3, #elevPriceUnit, #elevTotal, #installationFee, #total_").attr("readonly", true);
 
-    var numApp, numFloors, numBase, maxOcc;
+    var numApp, numFloors, numBase, maxOcc, numElev;
     var prodRange = {
         type: null,
         price: null,
@@ -100,8 +100,9 @@ $(document).ready(function () {
     }
 
     function emptyElevatorsNumberAndPricesFields() {
-        $("#numElev_3").val("");
+        console.log("test");
         $("#numElev_2").val("");
+        $("#numElev_3").val("");
         $(".priceField").val("");
     }
 
@@ -170,9 +171,52 @@ $(document).ready(function () {
             success: function (data) {
                 setRequiredElevatorsResult(data.finalNumElev);
                 if (prodRange.type != null) {
-                    setPricesResults(data.finalNumElev, data.subTotal, data.installationFee, data.grandTotal);
+                    setPricesResults(
+                        data.finalNumElev,
+                        data.subTotal,
+                        data.installationFee,
+                        data.grandTotal,
+                        data.numElev
+                    );
                 }
             },
         });
+    }
+
+    function doCalc() {
+        if (
+            $("#residential").hasClass("active") &&
+            !negativeValues() &&
+            $("#numApp").val() &&
+            $("#numBase").val() &&
+            $("#numFloors").val()
+        ) {
+            apiCall("residential");
+        } else if (
+            $("#commercial").hasClass("active") &&
+            !negativeValues() &&
+            $("#numElev").val() &&
+            $("#numFloors").val()
+        ) {
+            apiCall("#commercial");
+        } else if (
+            $("#corporate").hasClass("active") &&
+            !negativeValues() &&
+            $("#numFloors").val() &&
+            $("#numBase").val() &&
+            $("#maxOcc").val()
+        ) {
+            apiCall("#corporate");
+        } else if (
+            $("#hybrid").hasClass("active") &&
+            !negativeValues() &&
+            $("#numFloors").val() &&
+            $("#numBase").val() &&
+            $("#maxOcc").val()
+        ) {
+            apiCall("#hybrid");
+        } else {
+            emptyElevatorsNumberAndPricesFields();
+        }
     }
 });
