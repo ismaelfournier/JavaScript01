@@ -114,6 +114,7 @@ $(document).ready(function () {
             maximumOcc: maxOcc,
             productRange: prodRange,
             projectType: projectType,
+            numberElev: numElev,
         };
     }
 
@@ -198,7 +199,7 @@ $(document).ready(function () {
             $("#numElev").val() &&
             $("#numFloors").val()
         ) {
-            apiCall("#commercial");
+            apiCall("commercial");
         } else if (
             $("#corporate").hasClass("active") &&
             !negativeValues() &&
@@ -206,7 +207,7 @@ $(document).ready(function () {
             $("#numBase").val() &&
             $("#maxOcc").val()
         ) {
-            apiCall("#corporate");
+            apiCall("corporate");
         } else if (
             $("#hybrid").hasClass("active") &&
             !negativeValues() &&
@@ -214,7 +215,7 @@ $(document).ready(function () {
             $("#numBase").val() &&
             $("#maxOcc").val()
         ) {
-            apiCall("#hybrid");
+            apiCall("hybrid");
         } else {
             emptyElevatorsNumberAndPricesFields();
         }
